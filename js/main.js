@@ -1,16 +1,11 @@
 $(document).ready(function () {
 
-  var addDots = function () {
-    var text = $('.dots').text();
-    if (text !== '......') {
-      text += '.';
-      $('.dots').text(text);
-    } else {
-      $('.dots').text('');
-    };
-  };
+  //keep navbar at the top of the page
+  $(window).on('scroll', function (e) {
+    var heightToTop = $(document).scrollTop();
+    $('.navbar').animate({top: heightToTop}, 10);
+  });
 
-  setInterval(function () {
-    addDots();
-  },500);
+  
+
 });
