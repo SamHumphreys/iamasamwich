@@ -3,50 +3,62 @@ $(document).ready(function () {
   //keep navbar at the top of the page
   $(window).on('scroll', function () {
     var heightToTop = $(document).scrollTop();
-    if (heightToTop >= 60) {
-      navbarSide(heightToTop);
+    if (heightToTop >= 20) {
+      $('.navbar').addClass('on-the-side');
+      $('.to-top').show();
     } else {
-      navbarTop(heightToTop);
+      $('.navbar').removeClass('on-the-side');
+      $('.to-top').hide();
     };
   });
 
-  var navbarSide = function (heightToTop) {
-    $('.navbar').animate({  width: '160px',
-                            height: '100%',
-                            top: heightToTop
-    }, 25);
-    $('.navButtons').animate({width: '145px'}, 25);
-  };
 
-  var navbarTop = function (heightToTop) {
-    $('.navbar').animate({  width: '100%',
-                            height: '110px',
-                            top: '0'
-    }, 25);
-    $('.navButtons').animate({width: '960px'}, 25);
-  };
-
-  //make the heading appear
+  //make the heading appear, then fade out, and then fade in .content and request click listeners
   var headingIntro = function () {
-    var phrase = "console.log('Hi, I'm Sam');";
-    var array = phrase.split('');
-    var x = 0;
-    var doTheHeading = setInterval(function () {
-      var text = $('.heading').text();
-      text += array.shift();
-      $('.heading').text(text);
-      x++;
-      if (x >= phrase.length) {
-        window.clearInterval(doTheHeading);
-      };
-    }, 125);
+    var pause1 = $.Deferred();
+    var pause2 = $.Deferred();
+
+    var waitASec = function () {
+      setTimeout(function () {
+        pause1.resolve();
+      },1000);
+    };
+
+    var typeTheHeading = function () {
+      var phrase = "console.log('Hi, I'm Sam');".split('');
+      var x = 0;
+      var y = phrase.length;
+      var typeItOut = setInterval(function () {
+        var text = $('.typed-heading').text();
+        text += phrase.shift();
+        $('.typed-heading').text(text);
+        x++;
+        if (x >= y) {
+          window.clearInterval(typeItOut);
+          setTimeout(function () {
+            pause2.resolve();
+          }, 2000);
+        };
+      }, 125);
+    };
+
+    var removeTypedHeading = function () {
+      $('.typed-heading').fadeOut(1500, addContent);
+    };
+
+    var addContent = function () {
+      $('.content').fadeIn(1500);
+      addClickListeners();
+    };
+
+    waitASec();
+    pause1.done(typeTheHeading);
+    pause2.done(removeTypedHeading);
   };
+  headingIntro();
 
-
-  var makeHeading = function () {
-    headingIntro();
-  };
-
-  makeHeading();
+  var addClickListeners = function () {
+    console.log('clickListeners');
+  }
 
 });
