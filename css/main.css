@@ -79,9 +79,10 @@ body {
 
 .heading {
   font-size: 4em;
+  text-align: center;
 }
 
-.heading h1 {
-  margin: 0 auto;
-  
+.contact-details {
+  display: inline-block;
+  width: 48%;
 }
