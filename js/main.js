@@ -21,8 +21,8 @@ $(document).ready(function () {
     var waitASec = function () {
       setTimeout(function () {
         pause1.resolve();
-      },1000);
-      // },10);                  //change to 1000
+      // },1000);
+      },10);                  //change to 1000
     };
 
     var typeTheHeading = function () {
@@ -38,20 +38,20 @@ $(document).ready(function () {
           window.clearInterval(typeItOut);
           setTimeout(function () {
             pause2.resolve();
-          }, 2000);
-          // }, 20);
+          // }, 2000);
+          }, 20);
         };
-      }, 125);
-      // }, 1);
+      // }, 125);
+      }, 1);
     };
 
     var removeTypedHeading = function () {
-      $('.typed-heading').fadeOut(1500, addContent);   //change to 1500
+      $('.typed-heading').fadeOut(15, addContent);   //change to 1500
     };
 
     var addContent = function () {
-      $('.content').fadeIn(1500);    //change to 1500
-      addClickListeners();
+      $('.content').fadeIn(15);    //change to 1500
+      clickListeners.addAll();
     };
 
     waitASec();
@@ -60,8 +60,42 @@ $(document).ready(function () {
   };
   headingIntro();
 
-  var addClickListeners = function () {
-    console.log('clickListeners');
-  }
-
+  var clickListeners = {
+    addAll: function () {
+      clickListeners.toTheTop();
+      clickListeners.toContact();
+      clickListeners.toSkills();
+      clickListeners.toAbout();
+      clickListeners.toProjects();
+    },
+    toTheTop: function () {
+      $('.to-top').on('click', function () {
+        $('body').animate({scrollTop:0}, 500);
+      })
+    },
+    toContact: function () {
+      distToContact = $('.contact').offset().top;
+      $('#contact').on('click', function () {
+        $('body').animate({scrollTop:distToContact - 100}, 500);
+      });
+    },
+    toSkills: function () {
+      distToSkills = $('.skills').offset().top;
+      $('#skills').on('click', function () {
+        $('body').animate({scrollTop:distToSkills - 100}, 500);
+      });
+    },
+    toAbout: function () {
+      distToAbout = $('.about').offset().top;
+      $('#about-me').on('click', function () {
+        $('body').animate({scrollTop:distToAbout - 100}, 500);
+      });
+    },
+    toProjects: function () {
+      distToProjects = $('.projects').offset().top;
+      $('#projects').on('click', function () {
+        $('body').animate({scrollTop:distToProjects - 100}, 500);
+      });
+    }
+  };
 });
