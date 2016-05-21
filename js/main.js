@@ -21,7 +21,8 @@ $(document).ready(function () {
     var waitASec = function () {
       setTimeout(function () {
         pause1.resolve();
-      },10);                  //change to 1000
+      },1000);
+      // },10);                  //change to 1000
     };
 
     var typeTheHeading = function () {
@@ -37,17 +38,19 @@ $(document).ready(function () {
           window.clearInterval(typeItOut);
           setTimeout(function () {
             pause2.resolve();
-          }, 20);   //change to 2000
+          }, 2000);
+          // }, 20);
         };
-      }, 1);   //change to 125
+      }, 125);
+      // }, 1);
     };
 
     var removeTypedHeading = function () {
-      $('.typed-heading').fadeOut(15, addContent);   //change to 1500
+      $('.typed-heading').fadeOut(1500, addContent);   //change to 1500
     };
 
     var addContent = function () {
-      $('.content').fadeIn(15);    //change to 1500
+      $('.content').fadeIn(1500);    //change to 1500
       addClickListeners();
     };
 
