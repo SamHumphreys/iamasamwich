@@ -1,14 +1,57 @@
+//timing variables
+// var timing = {
+//   initialPause: 1000,
+//   typingSpeed: 125,
+//   waitAfterTyping: 2000,
+//   fade: 1500,
+//   scrollSpeed: 500,
+//   hideSpeed: 500
+// };
+
+//editing timing variables
+var timing = {
+  initialPause: 0,
+  typingSpeed: 0,
+  waitAfterTyping: 0,
+  fade: 0,
+  scrollSpeed: 0,
+  hideSpeed: 500
+};
+
+
 $(document).ready(function () {
 
   //keep navbar at the top of the page
+  //TTD add debounce for to-top
   $(window).on('scroll', function () {
     var heightToTop = $(document).scrollTop();
-    if (heightToTop >= 20) {
-      $('.navbar').addClass('shrunken');
-      $('.to-top').show();
-    } else {
+    if (heightToTop <= 20) {
+
+      //if at the top
       $('.navbar').removeClass('shrunken');
-      $('.to-top').hide();
+      $('.to-top').css({
+        width: 0
+      });
+      $('.button > img').css({
+        display: 'none'
+      });
+      setTimeout(function () {
+        $('.to-top').css('display', 'none');
+      }, timing.hideSpeed);
+
+    } else {
+      //if scrolled away from the top
+      $('.navbar').addClass('shrunken');
+      $('.to-top').css({
+        display: 'inline-block',
+        width: '185px'
+      });
+      setTimeout(function () {
+        $('.button > img').css({
+          display: 'inline-block'
+        })
+      }, timing.hideSpeed);
+
     };
   });
 
@@ -21,8 +64,9 @@ $(document).ready(function () {
     var waitASec = function () {
       setTimeout(function () {
         pause1.resolve();
-      },1000);
+      }, timing.initialPause);
     };
+
 
     var typeTheHeading = function () {
       $('body').animate({scrollTop: 0},100);
@@ -38,18 +82,18 @@ $(document).ready(function () {
           window.clearInterval(typeItOut);
           setTimeout(function () {
             pause2.resolve();
-          }, 2000);
+          }, timing.waitAfterTyping);
         };
-      }, 125);
+      }, timing.typingSpeed);
     };
 
     var removeTypedHeading = function () {
-      $('.typed-heading').fadeOut(1500, addContent);
+      $('.typed-heading').fadeOut(timing.fade, addContent);
     };
 
     var addContent = function () {
-      $('.navbar').fadeIn(1500);
-      $('.content').fadeIn(1500);
+      $('.navbar').fadeIn(timing.fade).css('display', 'inline-block');
+      $('.content').fadeIn(timing.fade);
       $('footer').show();
       clickListeners.addAll();
     };
@@ -58,6 +102,8 @@ $(document).ready(function () {
     pause1.done(typeTheHeading);
     pause2.done(removeTypedHeading);
   };
+
+  //runs the intro
   headingIntro();
 
   var clickListeners = {
@@ -70,31 +116,31 @@ $(document).ready(function () {
     },
     toTheTop: function () {
       $('.to-top').on('click', function () {
-        $('body').animate({scrollTop : 0}, 500);
+        $('body').animate({scrollTop : 0}, timing.scrollSpeed);
       })
     },
     toContact: function () {
       $('#contact').on('click', function () {
         var distToContact = $('.contact').offset().top;
-        $('body').animate({scrollTop : distToContact - 100}, 500);
+        $('body').animate({scrollTop : distToContact - 100}, timing.scrollSpeed);
       });
     },
     toSkills: function () {
       $('#skills').on('click', function () {
         var distToSkills = $('.skills').offset().top;
-        $('body').animate({scrollTop : distToSkills - 100}, 500);
+        $('body').animate({scrollTop : distToSkills - 100}, timing.scrollSpeed);
       });
     },
     toAbout: function () {
       $('#about-me').on('click', function () {
         var distToAbout = $('.about').offset().top;
-        $('body').animate({scrollTop : distToAbout - 100}, 500);
+        $('body').animate({scrollTop : distToAbout - 100}, timing.scrollSpeed);
       });
     },
     toProjects: function () {
       $('#projects').on('click', function () {
         var distToProjects = $('.projects').offset().top;
-        $('body').animate({scrollTop : distToProjects - 100}, 500);
+        $('body').animate({scrollTop : distToProjects - 100}, timing.scrollSpeed);
       });
     }
   };

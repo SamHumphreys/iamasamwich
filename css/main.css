@@ -22,10 +22,11 @@ body {
   height: 110px;
   background-color: #333;
   display: none;
-  transition: all 0.2s ease;
+  transition: all 0.75s ease;
 }
 
 .navButtons {
+  text-align: center;
   padding: 25px 5px 5px 0;
   margin: 0 auto;
   max-width: 960px;
@@ -34,17 +35,14 @@ body {
 
 .shrunken {
   height: 60px;
-  transition: all 0.5s ease;
 }
 
 .shrunken .navButtons {
   padding-top: 0;
-  transition: all 0.5s ease;
 }
 
 .shrunken button {
   height: 50px;
-  transition: all 0.5s ease;
 }
 
 .button {
@@ -56,10 +54,7 @@ body {
   height: 65px;
   border-radius: 5px;
   vertical-align: top;
-}
-
-.to-top {
-  display: none;
+  transition: all 0.5s ease;
 }
 
 .button:hover {
@@ -70,7 +65,8 @@ body {
 }
 
 .button img {
-  margin-top: 10px;
+  display: none;
+  margin-top: 5px;
   height: 35px;
   transform: rotate(180deg);
 }
