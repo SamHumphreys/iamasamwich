@@ -1,12 +1,12 @@
 //timing variables
-// var timing = {
-//   initialPause: 1000,
-//   typingSpeed: 125,
-//   waitAfterTyping: 2000,
-//   fade: 1500,
-//   scrollSpeed: 500,
-//   hideSpeed: 500
-// };
+var timing = {
+  initialPause: 1000,
+  typingSpeed: 125,
+  waitAfterTyping: 2000,
+  fade: 1500,
+  scrollSpeed: 500,
+  hideSpeed: 500
+};
 
 //editing timing variables
 var timing = {
@@ -20,37 +20,51 @@ var timing = {
 
 
 $(document).ready(function () {
+  $('body').animate({scrollTop: 0}, 0);
+  var debounce = 'startUp';
 
   //keep navbar at the top of the page
-  //TTD add debounce for to-top
   $(window).on('scroll', function () {
-    var heightToTop = $(document).scrollTop();
-    if (heightToTop <= 20) {
+    var scrollHeight = $(document).scrollTop();
+
+    console.log(scrollHeight, debounce);
+
+    if (scrollHeight <= 20 && debounce !== "top") {
 
       //if at the top
+      debounce = 'top';
       $('.navbar').removeClass('shrunken');
-      $('.to-top').css({
-        width: 0
-      });
       $('.button > img').css({
         display: 'none'
       });
+      $('.to-top').css({
+        width: 0
+      });
+
       setTimeout(function () {
-        $('.to-top').css('display', 'none');
+        $('.to-top').css({display: 'none'});
       }, timing.hideSpeed);
 
-    } else {
+    } else if (
+      scrollHeight > 20 && debounce !== 'notTop'
+      || $('.to-top').css('display') === 'none' && debounce !== 'startUp') {
+
       //if scrolled away from the top
+      debounce = 'notTop';
       $('.navbar').addClass('shrunken');
-      $('.to-top').css({
-        display: 'inline-block',
-        width: '185px'
-      });
-      setTimeout(function () {
-        $('.button > img').css({
-          display: 'inline-block'
-        })
+      $('.to-top').css({display: 'inline-block'}).animate({
+        width: ['60px', 'linear']
       }, timing.hideSpeed);
+      setTimeout(function () {
+        if ($('.to-top').css('display') === 'none') {
+
+        }
+        if (debounce === 'notTop') {
+          $('.button > img').css({
+            display: 'inline-block'
+          });
+        };
+      }, timing.hideSpeed * 2);
 
     };
   });
