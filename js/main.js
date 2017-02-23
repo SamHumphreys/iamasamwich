@@ -9,63 +9,52 @@ var timing = {
 };
 
 //editing timing variables
-var timing = {
-  initialPause: 0,
-  typingSpeed: 0,
-  waitAfterTyping: 0,
-  fade: 0,
-  scrollSpeed: 0,
-  hideSpeed: 500
-};
+// var timing = {
+//   initialPause: 0,
+//   typingSpeed: 0,
+//   waitAfterTyping: 0,
+//   fade: 0,
+//   scrollSpeed: 0,
+//   hideSpeed: 500
+// };
 
 
 $(document).ready(function () {
-  $('body').animate({scrollTop: 0}, 0);
-  var debounce = 'startUp';
+
+  var debounce = 0;
+  var position = 'start';
 
   //keep navbar at the top of the page
   $(window).on('scroll', function () {
+
     var scrollHeight = $(document).scrollTop();
 
-    console.log(scrollHeight, debounce);
-
-    if (scrollHeight <= 20 && debounce !== "top") {
-
-      //if at the top
-      debounce = 'top';
-      $('.navbar').removeClass('shrunken');
-      $('.button > img').css({
+    if (scrollHeight < 20
+          && debounce === 0
+          && position !==  ('start' || 'top')) {
+      debounce = 1;
+      $('.up-arrow').css({
         display: 'none'
       });
-      $('.to-top').css({
-        width: 0
-      });
-
+      $('.to-top').addClass('at-top');
       setTimeout(function () {
         $('.to-top').css({display: 'none'});
+        debounce = 0;
+        position = 'top';
       }, timing.hideSpeed);
 
-    } else if (
-      scrollHeight > 20 && debounce !== 'notTop'
-      || $('.to-top').css('display') === 'none' && debounce !== 'startUp') {
-
-      //if scrolled away from the top
-      debounce = 'notTop';
-      $('.navbar').addClass('shrunken');
-      $('.to-top').css({display: 'inline-block'}).animate({
-        width: ['60px', 'linear']
-      }, timing.hideSpeed);
+    } else if (scrollHeight >= 20
+                  && debounce === 0
+                  && position !== ('scrolled')) {
+      debounce = 1;
+      $('.to-top').css({display: 'inline-block'}).removeClass('at-top');
       setTimeout(function () {
-        if ($('.to-top').css('display') === 'none') {
-
-        }
-        if (debounce === 'notTop') {
-          $('.button > img').css({
-            display: 'inline-block'
-          });
-        };
-      }, timing.hideSpeed * 2);
-
+        $('.up-arrow').css({
+          display: 'inline-block'
+        });
+        debounce = 0;
+        position = 'scrolled';
+      }, timing.hideSpeed);
     };
   });
 
