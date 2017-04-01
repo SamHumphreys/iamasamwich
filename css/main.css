@@ -114,11 +114,6 @@ p {
   margin-bottom: 0;
 }
 
-.contact-details {
-  display: inline-block;
-  width: 49%;
-}
-
 .contact-icon {
   height: 30px;
   margin-right: 10px;
@@ -128,6 +123,32 @@ p {
 a {
   text-decoration: none;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  width: 100%;
+}
+
+tr.contact-row {
+  height: 60px;
+}
+
+th {
+  text-align: left
+}
+
+td {
+  text-align: left;
+  padding-left: 30px;
+  width: 50%;
+}
+
+
+
 
 .skill-row {
   margin: 0 auto;
