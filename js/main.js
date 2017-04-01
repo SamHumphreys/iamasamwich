@@ -9,14 +9,14 @@ var timing = {
 };
 
 //editing timing variables
-var timing = {
-  initialPause: 0,
-  typingSpeed: 0,
-  waitAfterTyping: 0,
-  fade: 0,
-  scrollSpeed: 0,
-  hideSpeed: 500
-};
+// var timing = {
+//   initialPause: 0,
+//   typingSpeed: 0,
+//   waitAfterTyping: 0,
+//   fade: 0,
+//   scrollSpeed: 0,
+//   hideSpeed: 500
+// };
 
 
 $(document).ready(function () {
