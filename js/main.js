@@ -1,22 +1,22 @@
 //timing variables
-var timing = {
-  initialPause: 1000,
-  typingSpeed: 125,
-  waitAfterTyping: 2000,
-  fade: 1500,
-  scrollSpeed: 500,
-  hideSpeed: 500
-};
-
-//editing timing variables
 // var timing = {
-//   initialPause: 0,
-//   typingSpeed: 0,
-//   waitAfterTyping: 0,
-//   fade: 0,
-//   scrollSpeed: 0,
+//   initialPause: 1000,
+//   typingSpeed: 125,
+//   waitAfterTyping: 2000,
+//   fade: 1500,
+//   scrollSpeed: 500,
 //   hideSpeed: 500
 // };
+
+// //editing timing variables
+var timing = {
+  initialPause: 0,
+  typingSpeed: 0,
+  waitAfterTyping: 0,
+  fade: 0,
+  scrollSpeed: 0,
+  hideSpeed: 500
+};
 
 
 $(document).ready(function () {
