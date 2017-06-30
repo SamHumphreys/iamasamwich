@@ -73,7 +73,7 @@ $(document).ready(function () {
 
     var typeTheHeading = function () {
       $('body').animate({scrollTop: 0},100);
-      var phrase = "console.log('Hi, I'm Sam');".split('');
+      var phrase = "console.log(\"Hi, I'm Sam\");".split('');
       var x = 0;
       var y = phrase.length;
       var typeItOut = setInterval(function () {
